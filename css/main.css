@@ -33,6 +33,10 @@ height: 350px;
   display: flex;
 }
 
+.compteur p {
+  margin: auto;
+}
+
 #green {
   background-color: green;
   display: none;
