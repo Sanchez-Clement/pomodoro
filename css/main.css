@@ -23,6 +23,8 @@ main {
 position: relative;
 width: 350px;
 height: 350px;
+overflow: hidden;
+border-radius: 50%;
 }
 
 #compteurBreak {
@@ -48,6 +50,8 @@ height: 350px;
 }
 
 
+
+
 #compteurSession div, #compteurBreak div {
   width: 350px;
   height: 350px;
@@ -56,5 +60,3 @@ height: 350px;
 
   position: absolute;
 }
-
-#
