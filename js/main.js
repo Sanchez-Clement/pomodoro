@@ -4,6 +4,7 @@ var secondeSession = -1;
 var secondeBreak = -1;
 var clearBreak;
 var clearSession;
+var clickCompteur = 0;
 // ***********************affichage de départ****************************************
 
 $("#break .time").text(minuteBreak);
@@ -56,8 +57,15 @@ $("#compteurSession .compteur p").text(minuteSession);
  */
 function compteurSession() {
 
+
+
+// // alert("oui");
+
+
 // alert(minuteBreak);
 $("#selecteurs p").off("click");
+
+
   secondeSession --;
   if (secondeSession < 0) {
     secondeSession = 59;
@@ -66,6 +74,13 @@ $("#selecteurs p").off("click");
   }
 
 $("#compteurSession .compteur p").text(minuteSession + ":" + secondeSession);
+
+if (secondeSession < 10) {
+  $("#compteurSession .compteur p").text(minuteSession + ": 0" + secondeSession);
+}
+
+
+
 if (secondeSession ==0 && minuteSession ==0) {
   secondeSession = -1;
   minuteSession = $("#session .time").text() - 1;
@@ -79,7 +94,10 @@ if (secondeSession ==0 && minuteSession ==0) {
 function compteurBreak() {
 // minuteBreak = $("#break .time").val;
 // alert("non");
-$("#selecteurs p").off("click");
+
+
+
+
   secondeBreak --;
   if (secondeBreak < 0) {
     secondeBreak = 59;
@@ -88,11 +106,17 @@ $("#selecteurs p").off("click");
   }
 
 $("#compteurBreak .compteur p").text(minuteBreak + ":" + secondeBreak);
+
+if (secondeBreak < 10) {
+  $("#compteurBreak.compteur p").text(minuteBreak + ": 0" + secondeBreak);
+}
+
 if (secondeBreak ==0 && minuteBreak ==0) {
   secondeBreak = -1;
   // minuteBreak = $("#break .time").text() - 1;
   // alert("oui");
   clearInterval(clearBreak);
+  compteurSession=0;
 
 session();
 
@@ -108,14 +132,30 @@ session();
  * @return {type}  no return
  */
 function session() {
+clickCompteur++;
+
+if (clickCompteur ==1) {
+
+
   minuteSession = $("#session .time").text();
-  // alert(minuteSession);
-// $("#compteurSession .compteur p").text(minuteSession + ":" + secondeSession);
+
 clearSession =setInterval(compteurSession, 1000);
 $("#compteurBreak").hide();
 $("#red").slideUp(1000);
 $("#compteurSession").show();
  $("#green").slideDown(minuteSession * 60000);
+
+}
+
+if (clickCompteur %2 == 0) {
+
+  $("#compteurSession").click(pauseSession());
+} else if( clickCompteur %2 != 0  && clickCompteur !=1 ){
+  repriseSession();
+}
+console.log(clickCompteur);
+
+
 }
 
 function lanceBreak() {
@@ -132,7 +172,23 @@ $("#red").slideDown(minuteBreak * 60000);
 }
 
 
+function pauseSession() {
+
+   $("#green").stop();
+  clearInterval(clearSession);
+
+
+}
+
+function repriseSession() {
+  // alert("reprise");
+  $("#green").slideDown(minuteSession * 60000 + secondeSession * 1000);
+console.log(minuteSession,secondeSession);
+  clearSession =setInterval(compteurSession, 1000);
+}
+
+
 // **********************fin des fonctions**************************************
+if (clickCompteur==0) {
 
-
-$("#compteurSession").click(session);
+$("#compteurSession").click(session);}
