@@ -1,10 +1,12 @@
-var minuteSession= 0;
-var minuteBreak = 30;
+var minuteSession= 1;
+var minuteBreak = 1;
 var secondeSession = -1;
 var secondeBreak = -1;
 var clearBreak;
 var clearSession;
 var clickCompteur = 0;
+var testminute = 0;
+
 // ***********************affichage de départ****************************************
 
 $("#break .time").text(minuteBreak);
@@ -13,8 +15,10 @@ $("#session .time").text(minuteSession);
 $("#compteurSession .compteur p").text(minuteSession);
 
 // *************************************augmenter ou diminuer compteur break***************************
+function selectClick() {
 $("#break p:first").click(function() {
-  minuteBreak--;
+  if(minuteBreak >1) {
+  minuteBreak--;}
   secondeBreak = -1;
   $("#break .time").text(minuteBreak);
 $("#compteurBreak .compteur p").text(minuteBreak);
@@ -27,24 +31,30 @@ $("#break p:last").click(function() {
   $("#break .time").text(minuteBreak);
 $("#compteurBreak .compteur p").text(minuteBreak);
 })
+
+
 // *************************************augmenter ou diminuer compteur session***************************
 
 
 $("#session p:first").click(function() {
-  minuteSession--;
+  if(minuteSession > 1) {
+  minuteSession--;}
   secondeSession = -1;
   $("#session .time").text(minuteSession);
 $("#compteurSession .compteur p").text(minuteSession);
+$("#green").slideUp(1000);
 })
 
 $("#session p:last").click(function() {
+
   minuteSession++;
   secondeSession = -1;
   $("#session .time").text(minuteSession);
 $("#compteurSession .compteur p").text(minuteSession);
+$("#green").slideUp(1000);
 })
 
-
+}
 
 
 // **************************************début des fonction***********************************
@@ -134,6 +144,7 @@ session();
 function session() {
 clickCompteur++;
 
+
 if (clickCompteur ==1) {
 
 
@@ -173,15 +184,19 @@ $("#red").slideDown(minuteBreak * 60000);
 
 
 function pauseSession() {
+clickselecteur=0;
+testminute = minuteSession;
+console.log(testminute);
 
    $("#green").stop();
   clearInterval(clearSession);
+  selectClick();
 
 
 }
 
 function repriseSession() {
-  // alert("reprise");
+
   $("#green").slideDown(minuteSession * 60000 + secondeSession * 1000);
 console.log(minuteSession,secondeSession);
   clearSession =setInterval(compteurSession, 1000);
@@ -189,6 +204,8 @@ console.log(minuteSession,secondeSession);
 
 
 // **********************fin des fonctions**************************************
+selectClick();
+
 if (clickCompteur==0) {
 
 $("#compteurSession").click(session);}
