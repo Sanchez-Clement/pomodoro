@@ -14,6 +14,7 @@ $("#compteurSession .compteur p").text(minuteSession);
 // *************************************augmenter ou diminuer compteur break***************************
 $("#break p:first").click(function() {
   minuteBreak--;
+  secondeBreak = -1;
   $("#break .time").text(minuteBreak);
 $("#compteurBreak .compteur p").text(minuteBreak);
 })
@@ -21,6 +22,7 @@ $("#compteurBreak .compteur p").text(minuteBreak);
 
 $("#break p:last").click(function() {
   minuteBreak++;
+  secondeBreak = -1;
   $("#break .time").text(minuteBreak);
 $("#compteurBreak .compteur p").text(minuteBreak);
 })
@@ -29,12 +31,14 @@ $("#compteurBreak .compteur p").text(minuteBreak);
 
 $("#session p:first").click(function() {
   minuteSession--;
+  secondeSession = -1;
   $("#session .time").text(minuteSession);
 $("#compteurSession .compteur p").text(minuteSession);
 })
 
 $("#session p:last").click(function() {
   minuteSession++;
+  secondeSession = -1;
   $("#session .time").text(minuteSession);
 $("#compteurSession .compteur p").text(minuteSession);
 })
@@ -53,7 +57,7 @@ $("#compteurSession .compteur p").text(minuteSession);
 function compteurSession() {
 
 // alert(minuteBreak);
-
+$("#selecteurs p").off("click");
   secondeSession --;
   if (secondeSession < 0) {
     secondeSession = 59;
@@ -75,6 +79,7 @@ if (secondeSession ==0 && minuteSession ==0) {
 function compteurBreak() {
 // minuteBreak = $("#break .time").val;
 // alert("non");
+$("#selecteurs p").off("click");
   secondeBreak --;
   if (secondeBreak < 0) {
     secondeBreak = 59;
@@ -104,7 +109,7 @@ session();
  */
 function session() {
   minuteSession = $("#session .time").text();
-  alert(minuteSession);
+  // alert(minuteSession);
 // $("#compteurSession .compteur p").text(minuteSession + ":" + secondeSession);
 clearSession =setInterval(compteurSession, 1000);
 $("#compteurBreak").hide();
@@ -116,7 +121,7 @@ $("#compteurSession").show();
 function lanceBreak() {
 
 minuteBreak = $("#break .time").text();
-alert(minuteBreak);
+// alert(minuteBreak);
 // $("#compteurSession .compteur p").text(minuteSession + ":" + secondeSession);
 clearBreak = setInterval(compteurBreak, 1000);
 $("#compteurSession").hide();
