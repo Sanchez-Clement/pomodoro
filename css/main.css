@@ -1,8 +1,35 @@
+body {
+  min-height: 100vh;
+  width: 100%;
+  background-image: url(../img/pattern.jpg);
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
 main {
   display: flex;
   flex-flow: column nowrap;
   align-items: center;
 }
+
+#principal h1 {
+  font-family: 'Pacifico', cursive;
+  color: white;
+  font-size: 40px;
+}
+
+#selecteurs h2 {
+  font-family: 'Pacifico', cursive;
+  color: black;
+  font-size: 29px;
+}
+
+#selecteurs p {
+  margin: 10px;
+  font-size: 25px;
+}
+
+
 
 #selecteurs {
   display: flex;
@@ -14,10 +41,26 @@ main {
 
 #break, #session {
   display: flex;
+  font-family: 'Pacifico', cursive;
+  color: black;
   flex-flow: row wrap;
-  width: 120px;
+  justify-content: center;
+  width: 160px;
 }
 
+#principal h3 {
+font-family: 'Pacifico', cursive;
+position: relative;
+top: 60px;
+
+}
+
+.compteur p {
+  font-family: 'Pacifico', cursive;
+  font-size: 40px;
+  position: relative;
+  top : 90px;
+}
 
 #compteurSession, #compteurBreak {
 position: relative;
@@ -33,37 +76,57 @@ border-radius: 50%;
 
 .compteur {
   display: flex;
+  flex-flow: column nowrap;
+  align-items: center;
+  justify-content: flex-start;
 }
 
-.compteur p {
-  margin: auto;
-}
 
 #green {
-  background-image: url(../img/eau.gif);
+  /*background-image: url(../img/eau.gif);*/
   background-size: cover;
   background-repeat: no-repeat;
   /*border: none;*/
-  /*background-color: green;*/
+  background-color: rgb(27,161,226);
   display: none;
+  z-index: 10;
 }
 
 #red {
-  background-color: red;
+  /*background-image: url(../img/sable.jpg);*/
+   background-color: rgb(117,219,27);
   display: none;
+  z-index: 10;
+
+}
+
+#compteurSession .compteur {
+    /*background-image: url(../img/sable.jpg);*/
+    background-color: rgb(117,219,27);
+}
+
+#compteurBreak .compteur {
+    background-color: rgb(27,161,226);
+/*background-image: url(../img/eau.gif);
+background-size: cover;
+background-repeat: no-repeat;*/
+}
+
+#compteurSession p, #compteurBreak p,#compteurBreak h3, #compteurSession h3  {
+  z-index: 20;
 }
 
 
-#compteurSession .compteur,#compteurBreak .compteur {
-    border: 2px solid black;
-}
+/*#compteurSession .compteur,#compteurBreak .compteur {
+
+}*/
 
 
 #compteurSession div, #compteurBreak div {
   width: 350px;
   height: 350px;
 
-  border-radius: 50%;
+  /*border-radius: 50%;*/
 
   position: absolute;
 }
